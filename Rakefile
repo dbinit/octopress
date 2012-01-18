@@ -52,7 +52,9 @@ task :generate do
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
   puts "## Generating Site with Jekyll"
   system "compass compile --css-dir #{source_dir}/stylesheets"
+  system "for file in #{source_dir}/javascripts/_*.js; do cat \"$file\"; echo; done > #{source_dir}/javascripts/combined.js"
   system "jekyll"
+  system "find #{public_dir}/javascripts -name *.js | xargs -n 1 uglifyjs -nc --overwrite"
 end
 
 desc "Watch the site and regenerate when it changes"
@@ -60,6 +62,7 @@ task :watch do
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
   puts "Starting to watch source with Jekyll and Compass."
   system "compass compile --css-dir #{source_dir}/stylesheets" unless File.exist?("#{source_dir}/stylesheets/screen.css")
+  system "for file in #{source_dir}/javascripts/_*.js; do cat \"$file\"; echo; done > #{source_dir}/javascripts/combined.js" unless File.exist?("#{source_dir}/javascripts/combined.css")
   jekyllPid = Process.spawn({"OCTOPRESS_ENV"=>"preview"}, "jekyll --auto")
   compassPid = Process.spawn("compass watch")
 
@@ -76,6 +79,7 @@ task :preview do
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
   puts "Starting to watch source with Jekyll and Compass. Starting Rack on port #{server_port}"
   system "compass compile --css-dir #{source_dir}/stylesheets" unless File.exist?("#{source_dir}/stylesheets/screen.css")
+  system "for file in #{source_dir}/javascripts/_*.js; do cat \"$file\"; echo; done > #{source_dir}/javascripts/combined.js" unless File.exist?("#{source_dir}/javascripts/combined.css")
   jekyllPid = Process.spawn({"OCTOPRESS_ENV"=>"preview"}, "jekyll --auto")
   compassPid = Process.spawn("compass watch")
   rackupPid = Process.spawn("rackup --port #{server_port}")
