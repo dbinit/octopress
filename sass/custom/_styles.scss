@@ -1,6 +1,13 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 
+.index {
+  font-size: 1.5em;
+  text-align: center;
+  margin: 1em auto 0;
+  max-width: 24em;
+}
+
 .tag-cloud {
   div {
     text-align: center;

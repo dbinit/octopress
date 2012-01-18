@@ -6,7 +6,7 @@ comments: false
 ---
 {% img center /images/family.jpg 750 375 'Family' 'My wonderful family' %}
 
-Hello, I’m David.
+I’m David.
 
 I’m a Christian, husband, father, and programmer, among other things.
 
