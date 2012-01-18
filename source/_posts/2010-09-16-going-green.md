@@ -33,7 +33,8 @@ having to run full blown Apache to use mod_wsgi. Simpler is better and, even
 though I opted to compile some things, Gunicorn _seemed_ simpler. Especially
 when it came to finally running the Django project.
 
-_Install [Python](http://www.python.org/)_
+Install [Python](http://www.python.org/)
+----------------------------------------
 
 As you'll see with most of this, I like to play with the latest and greatest.
 So, the first thing I chose to do, and it's completely optional, is install
@@ -66,7 +67,8 @@ Also, make sure you activate your changes after editing the file:
 $ source ~/.bashrc
 ```
 
-_Install Packages_
+Install Packages
+----------------
 
 Next, you'll probably want distribute, pip, and virtualenv:
 
@@ -85,14 +87,15 @@ all of these in the virtualenv we'll make further down:
 $ pip install mercurial ipython psycopg2 python-memcached setproctitle greenlet
 ```
 
-  * Mercurial: pretty self explanatory.
-  * IPython: I just recently discovered this very nice Python shell replacement. Django's "python manage.py shell" will use it if installed.
-  * Psycopg2: I prefer PostgreSQL to MySQL (partly because I'm using PostGIS for some stuff) and this adapter recently [added support](http://initd.org/psycopg/docs/advanced.html#support-to-coroutine-libraries) for gevent (details below).
-  * Python-memcached: I'll go over this in a separate post.
-  * setproctitle: This little utility lets Gunicorn change its process name as seen in ps and top. Quite handy.
-  * greenlet: Used by gevent, which we'll be installing below.
+* Mercurial: pretty self explanatory.
+* IPython: I just recently discovered this very nice Python shell replacement. Django's "python manage.py shell" will use it if installed.
+* Psycopg2: I prefer PostgreSQL to MySQL (partly because I'm using PostGIS for some stuff) and this adapter recently [added support](http://initd.org/psycopg/docs/advanced.html#support-to-coroutine-libraries) for gevent (details below).
+* Python-memcached: I'll go over this in a separate post.
+* setproctitle: This little utility lets Gunicorn change its process name as seen in ps and top. Quite handy.
+* greenlet: Used by gevent, which we'll be installing below.
 
-_Install [libevent](http://monkey.org/~provos/libevent/)_
+Install [libevent](http://monkey.org/~provos/libevent/)
+-------------------------------------------------------
 
 This might be optional on WebFaction. It appears to already be installed
 (along with memcached), but I like to run the latest and greatest (1.4.14b as
@@ -108,7 +111,8 @@ $ make
 $ make install
 ```
 
-_Install [gevent](http://www.gevent.org/)_
+Install [gevent](http://www.gevent.org/)
+----------------------------------------
 
 This can be installed with pip, but we have to tell it where we installed
 libevent:
@@ -121,7 +125,8 @@ And that's it for preliminaries. I wait to install Gunicorn into the
 virtualenv because it provides its own scripts that will automatically
 activate/use the right python executable (which makes things very simple).
 
-_Create an app_
+Create an app
+-------------
 
 On WebFaction, you'll now need to go to your control panel and add a new
 "Custom app (listening on port)". Make sure you make note of the port it
@@ -144,7 +149,8 @@ $ pip install django docutils gunicorn
 You might notice that the first thing I did was upgrade pip and distribute. It
 just annoys me that virtualenv installs old versions. :)
 
-_Create a Django project_
+Create a Django project
+-----------------------
 
 Now we'll create an empty Django project and set it up for use with Gunicorn:
 
@@ -234,7 +240,8 @@ $ cd myproject
 $ python manage.py syncdb
 ```
 
-_Configure Gunicorn_
+Configure Gunicorn
+------------------
 
 Finally, let's create a Gunicorn configuration file. I like to put it in an
 etc directory:
@@ -265,7 +272,8 @@ What this does is load 3 gevent workers (feel free to tweak that... I keep it
 low because of memory limits on WebFaction) and run the make_psycopg_green
 function every time it forks a new worker.
 
-_Run Gunicorn_
+Run Gunicorn
+------------
 
 All that's left now is to run Gunicorn. We're just going to run it from the
 command line for now. I have it set up to run in Supervisord, but I'll leave

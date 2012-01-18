@@ -1,2 +1,19 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+
+.tag-cloud {
+  div {
+    text-align: center;
+    margin: .5em 1em 0;
+    span {
+      line-height: 1.4em;
+      margin: 0 .25em;
+      a {
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

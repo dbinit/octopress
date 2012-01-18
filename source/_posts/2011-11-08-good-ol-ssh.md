@@ -23,12 +23,11 @@ in Terminal was a pain.
 Well, that turned out to be quite an easy fix. How is it that I never knew
 about ssh-config? Merely create a "~/.ssh/config" file and put in:
 
-
-    Host whatever
-        HostName  whatever.wherever.com
-        User      myuser
-
-
+```
+Host whatever
+    HostName  whatever.wherever.com
+    User      myuser
+```
 
 Now you can just "ssh whatever" from a Terminal window. What a relief!
 
@@ -43,20 +42,17 @@ Netcat wasn't installed on the firewall.
 As it turns out, and I don't know why this was so hard to find, SSH has netcat
 built in. So instead of doing something like this:
 
-
-    Host whatever
-        HostName      whatever.wherever.com
-        User          myuser
-        ProxyCommand  ssh user@whatever.wherever.com nc %h %p
-
-
+```
+Host whatever
+    HostName      whatever.wherever.com
+    User          myuser
+    ProxyCommand  ssh user@whatever.wherever.com nc %h %p
+```
 
 Just replace the last line with this:
 
-
-        ProxyCommand  ssh -W %h:%p user@whatever.wherever.com
-
-
+```
+    ProxyCommand  ssh -W %h:%p user@whatever.wherever.com
+```
 
 It does the same thing, just doesn't require netcat. And it works great!
-

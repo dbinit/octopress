@@ -1,42 +1,29 @@
 module Jekyll
   class TagCloud < Liquid::Tag
-
-    CLOUD_MAX_RANKS = 5;
-    CLOUD_SIZE = 100;
+    safe = true
 
     def render(context)
       s = StringIO.new
       begin
-        tags = context['site']['tags']
+        tags = context['site']['tags'].map{|tag|
+          {
+            "title"    => tag[0],
+            "posts"    => tag[1]
+          }
+        }
         unless tags.nil?
-          sorted = tags.sort {|a, b| b[1].length <=> a[1].length}
-          factor = 1
-          max_count = sorted[0][1].length
-          min_count = sorted[-1][1].length
+          min_count = tags.min{|a, b| a["posts"].length <=> b["posts"].length }["posts"].length
+          max_count = tags.max{|a, b| a["posts"].length <=> b["posts"].length }["posts"].length
 
-          if max_count == min_count
-            min_count -= CLOUD_MAX_RANKS
-          else
-            factor = (CLOUD_MAX_RANKS - 1) / Math.log(max_count - min_count + 1)
-          end
+          weights = tags.inject({}){|result, tag| result[tag["title"]] = ( ((tag["posts"].length - min_count) * (280 - 75)) / (max_count - min_count) ) + 75; result }
 
-          if sorted.length < CLOUD_MAX_RANKS
-            factor *= sorted.length / CLOUD_MAX_RANKS.to_f
-          end
-
-          for index in (0..CLOUD_SIZE).to_a.shuffle do
-            if sorted[index].nil?
-              next
-            end
-
-            rank = CLOUD_MAX_RANKS - (Math.log(sorted[index][1].length - min_count + 1) * factor).to_i
-            s << "<span class=\"rank-#{rank}\">"
-            s << "<a href=\"/tag/#{sorted[index][0]}/\">#{sorted[index][0]}</a>"
-            s << "</span> "
-          end
+          tags.inject("") { |html, tag|
+            s << "<span style='font-size: #{sprintf("%d", weights[tag['title']])}%'>"
+            s << "<a href='/tag/#{tag['title'].gsub(/_|\W/, '-')}/'>#{tag["title"]}</a>"
+            s << "</span>\n"
+          }
         end
       rescue => boom
-        # Nothing, I think
         p boom
       end
       s.string

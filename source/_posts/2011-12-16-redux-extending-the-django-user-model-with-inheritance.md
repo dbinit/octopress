@@ -67,7 +67,7 @@ back in on init.
 Anyway, that's the story. The package can be found at
 [http://pypi.python.org/pypi/django-user-extension/](http://pypi.python.org/pypi/django-user-extension/)
 and the source is at
-[http://bitbucket.org/dbinit/django-user-extension](http://bitbucket.org/dbinit/django-user-extension).
+[http://bitbucket.org/dbinit/django-user-extension/](http://bitbucket.org/dbinit/django-user-extension/).
 
 I honestly think this approach is way cleaner and easier than the whole
 "profile" approach. Having to add your profile model name to your settings.py

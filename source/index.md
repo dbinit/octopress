@@ -1,5 +1,6 @@
 ---
 layout: page
 footer: false
+comments: false
 ---
-Hello.
+Hello, I'm David.
