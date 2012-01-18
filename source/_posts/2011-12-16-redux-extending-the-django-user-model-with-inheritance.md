@@ -1,7 +1,8 @@
 ---
 layout: post
-comments: true
 title: "Redux: Extending the Django User model with inheritance"
+description: A little twist to an old solution.
+comments: true
 tags:
 - django
 - python

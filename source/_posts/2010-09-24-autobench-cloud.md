@@ -1,7 +1,8 @@
 ---
 layout: post
-comments: true
 title: Autobench Cloud
+description: Running benchmarks with autobench on Amazon EC2 and Ubuntu.
+comments: true
 tags:
 - amazon ec2
 - autobench

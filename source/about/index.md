@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About David Bennett
+title: About
 footer: false
 comments: false
 ---

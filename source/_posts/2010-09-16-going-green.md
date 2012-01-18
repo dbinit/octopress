@@ -1,7 +1,8 @@
 ---
 layout: post
-comments: true
 title: Going Green
+description: How I got a Django project up and running using Gunicorn and gevent.
+comments: true
 tags:
 - django
 - gevent

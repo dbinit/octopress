@@ -1,7 +1,8 @@
 ---
 layout: post
-comments: true
 title: Easy Django on Windows with CherryPy
+description: A simple solution for small projects.
+comments: true
 tags:
 - cherrypy
 - django

@@ -1,7 +1,8 @@
 ---
 layout: post
-comments: true
 title: Good ol' SSH
+description: Some new things I've learned.
+comments: true
 tags:
 - ssh
 - putty
