@@ -5,13 +5,17 @@
   font-size: 1.5em;
   text-align: center;
   margin: 1em auto 0;
-  max-width: 24em;
+  max-width: 26em;
+}
+
+#blog-archives {
+  margin-top: -.75em;
 }
 
 .tag-cloud {
-  div {
+  p {
     text-align: center;
-    margin: .5em 1em 0;
+    margin: 0 1em;
     span {
       line-height: 1.4em;
       margin: 0 .25em;
