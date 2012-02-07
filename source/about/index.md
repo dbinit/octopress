@@ -5,7 +5,7 @@ description: About David Bennett.
 footer: false
 comments: false
 ---
-{% img center /images/family.jpg 750 375 'Family' 'My wonderful family' %}
+{% img center /images/david_bennett_family.jpg 750 375 'Family' 'My wonderful family' %}
 
 I’m David.
 
